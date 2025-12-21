@@ -1,3 +1,13 @@
+/**
+ * @file help.cpp
+ * @author Yuru.Tu (ccl70710@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2025-12-21
+ * 
+ * @copyright Copyright (c) 2025 Yuru.Tu This software is released under the MIT License.
+ * 
+ */
 #include <glog/logging.h>
 
 int main(int argc, char* argv[]) {
