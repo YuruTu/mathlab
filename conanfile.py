@@ -18,7 +18,7 @@ class MathlabConan(ConanFile):
     description = " C++ library"   # 描述
     topics = ("cpp", "utils", "example")   # 标签
     #homepage = "https://github.com/your/repo"  # 主页
-    # url = "https://github.com/your/repo"       # 仓库地址
+    url = "https://github.com/YuruTu/mathlab"       # 仓库地址
 
     # 2. 构建配置（关键）
     settings = "os", "compiler", "build_type", "arch"  # 构建环境（自动适配）
@@ -76,4 +76,5 @@ class MathlabConan(ConanFile):
         self.cpp_info.libdirs = ["lib"]  # 库目录
         # 针对 Windows 动态库
         if self.settings.os == "Windows" and self.options.shared:
-            self.cpp_info.defines = ["MYPACKAGE_SHARED"]
+            self.cpp_info.defines = ["MATHLAB_SHARED"]
+            

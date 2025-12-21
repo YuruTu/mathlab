@@ -18,8 +18,15 @@ else()
     # Ninja通用配置
 endif()
 
+
 find_package(glog REQUIRED)
 
+add_compile_definitions(_USE_MATH_DEFINES)
+# 添加子目录
+add_subdirectory(modules)
+
+
+
 # 可执行文件
-add_executable(mathlab_app tool/help.cpp)
-target_link_libraries(mathlab_app PRIVATE glog::glog)
+add_executable(mathlab_help tool/help.cpp)
+target_link_libraries(mathlab_help PRIVATE glog::glog)
