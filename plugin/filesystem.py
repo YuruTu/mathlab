@@ -1,6 +1,11 @@
+'''
+@file: plugin/filesystem.py
+@description: 文件系统相关的辅助函数
+@author: Yuru.Tu
+@date: 2025-12-28
+@copyright: Yuru.Tu Copyright (c) 2025 Yuru.Tu This software is released under the MIT License.
+'''
 import os
-
-# /e:/code/mathlab/plugin/filesystem.py
 
 def create_empty_dir(path):
     """

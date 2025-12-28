@@ -1,7 +1,7 @@
 /**
  * @file rand.cpp
  * @author Yuru.Tu (ccl70710@gmail.com)
- * @brief 
+ * @brief 生成随机数
  * @version 0.1
  * @date 2025-12-21
  * 
@@ -9,7 +9,7 @@
  * 
  */
 
-#include "rand.h"
+#include "rand/rand.h"
 
 #include <iostream>
 #include <cmath>
@@ -17,6 +17,7 @@
 #include <limits>
 
 namespace ml {
+
 /**
  * @brief 生成服从 N(mu, sigma^2) 的正态分布随机数
  * * @param mu 均值

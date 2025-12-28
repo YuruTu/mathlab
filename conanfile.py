@@ -24,7 +24,7 @@ class MathlabConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"  # 构建环境（自动适配）
     options = {"shared": [True, False], "fPIC": [True, False]}  # 自定义选项
     default_options = {"shared": False, "fPIC": True}            # 选项默认值
-    # exports_sources = "CMakeLists.txt", "src/*", "include/*"  # 打包的源码文件
+    exports_sources = "CMakeLists.txt", "src/*", "include/*" # 打包的源码文件
 
     # 3. 核心方法（按需实现）
     def layout(self):
@@ -41,7 +41,9 @@ class MathlabConan(ConanFile):
         self.requires("glog/0.7.1")
         # self.requires("spdlog/1.11.0", transitive_headers=True)
 
+    
     def build_requirements(self):
+        self.test_requires("gtest/1.17.0")
         pass
         # 声明构建时依赖（如 CMake、ninja）
         # self.tool_requires("cmake/3.25.0")
@@ -62,12 +64,6 @@ class MathlabConan(ConanFile):
         # 打包产物（复制头文件、库、二进制）
         cmake = CMake(self)
         cmake.install()  # 基于 CMakeLists.txt 的 install 规则
-        # 手动复制（可选）
-        # self.copy("*.h", dst="include", src="include")
-        # self.copy("*.lib", dst="lib", keep_path=False)
-        # self.copy("*.dll", dst="bin", keep_path=False)
-        # self.copy("*.so*", dst="lib", keep_path=False)
-        # self.copy("*.a", dst="lib", keep_path=False)
 
     def package_info(self):
         # 导出包信息（供依赖者使用）
