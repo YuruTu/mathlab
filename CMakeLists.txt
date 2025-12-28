@@ -1,7 +1,10 @@
 cmake_minimum_required(VERSION 3.15)
 
+include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
+
 project(mathlab
-    VERSION 0.1.0
+    VERSION 1.0.0
     DESCRIPTION "A small demo project for CMake"
     LANGUAGES CXX)
 
@@ -68,3 +71,7 @@ install(EXPORT mathlabTargets
     DESTINATION lib/cmake/mathlab
 )
 
+# 5. 生成 Config 文件，供 find_package 使用
+
+install(FILES "${CMAKE_SOURCE_DIR}/cmake/Findmathlab.cmake"
+  DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/mathlab")

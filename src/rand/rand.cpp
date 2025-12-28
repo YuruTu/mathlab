@@ -9,7 +9,7 @@
  * 
  */
 
-#include "rand/rand.h"
+#include "mathlab/rand/rand.h"
 
 #include <iostream>
 #include <cmath>

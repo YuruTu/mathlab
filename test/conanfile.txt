@@ -1,0 +1,4 @@
+[requires]
+glog/0.7.1
+gtest/1.17.0
+mathlab/1.0.0

@@ -1,7 +1,7 @@
 /**
  * @file help.cpp
  * @author Yuru.Tu (ccl70710@gmail.com)
- * @brief 
+ * @brief 介绍mathlab的用法
  * @version 0.1
  * @date 2025-12-21
  * 

@@ -1,7 +1,7 @@
 '''
 @file: build.py
 @description: 构建辅助脚本
-@author: Yuru.Tu
+@author: Yuru.Tu (ccl70710@gmail.com)
 @date: 2025-12-21
 @copyright: Yuru.Tu Copyright (c) 2025 Yuru.Tu This software is released under the MIT License.
 '''
@@ -22,18 +22,18 @@ if __name__ == "__main__":
     # else:
         encoding_type = "utf-8"
     
-    # 使用 subprocess.Popen 运行命令并自动输入 "y"
-    import subprocess
-    process = subprocess.Popen("conan remove mathlab", stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,encoding=encoding_type)
-    # 输入 "y" 来自动确认
-    process.communicate(input="yes\n")
+    run_shell("conan remove mathlab --force", stream=True,encoding=encoding_type)
 
-    retcode, out, err = run_shell("conan install .  --build=missing", stream=True,encoding=encoding_type)
+    retcode, out, err = run_shell("conan install . --build=missing --build-folder=build", shell=True,stream=True,encoding=encoding_type)
     logging.info(f"构建完成，返回码: {retcode}")
     if retcode != 0:
-        logging.error(f"构建失败，错误信息: {err}")
-    retcode, out, err = run_shell("conan build . ", stream=True,encoding=encoding_type)
-    logging.info(f"构建完成，返回码: {retcode}")
+        logging.fatal(f"构建失败，错误信息: {err}")
+    run_shell("conan build . ", shell=True,stream=True,encoding=encoding_type)
+    retcode, out, err = run_shell("conan create . ",shell=True, stream=True,encoding=encoding_type)
     if retcode != 0:
-        logging.error(f"构建失败，错误信息: {err}")
-    run_shell("conan create . ", stream=True,encoding=encoding_type)
+        logging.fatal(f"构建失败，错误信息: {err}")
+    create_empty_dir("E:\\package\\conan\\mathlab")
+    
+    retcode, out, err = run_shell(f"conan export-pkg .",shell=True, stream=True,encoding=encoding_type)
+    if retcode != 0:
+        logging.fatal(f"构建失败，错误信息: {err}")
