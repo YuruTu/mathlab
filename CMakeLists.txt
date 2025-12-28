@@ -73,5 +73,5 @@ install(EXPORT mathlabTargets
 
 # 5. 生成 Config 文件，供 find_package 使用
 
-install(FILES "${CMAKE_SOURCE_DIR}/cmake/Findmathlab.cmake"
-  DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/mathlab")
+# install(FILES "cmake/Findmathlab.cmake"
+#   DESTINATION lib/cmake/mathlab)

@@ -74,9 +74,10 @@ class MathlabConan(ConanFile):
             src=self.source_folder,
             dst=os.path.join(output_dir, "licenses"),
         )
-
+        copy(self, "cmake/Findmathlab.cmake",
+             src=self.source_folder, dst=os.path.join(output_dir, "lib"))
+        
         import shutil
-
         shutil.rmtree(self.package_folder)
 
     def package_info(self):

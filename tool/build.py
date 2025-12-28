@@ -34,7 +34,7 @@ def main():
     logging.info(f"构建完成，返回码: {retcode}")
 
     create_empty_dir("build")
-    retcode, out, err = run_shell("cmake .. ", shell=True, cwd="build", stream=True)
+    retcode, out, err = run_shell("cmake .. -DCMAKE_BUILD_TYPE=Release", shell=True, cwd="build", stream=True)
     logging.info(f"构建完成，返回码: {retcode}")
     if retcode != 0:
         logging.error(f"构建失败，错误信息: {err}")

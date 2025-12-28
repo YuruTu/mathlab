@@ -8,14 +8,18 @@
  * @copyright Copyright (c) 2025 Yuru.Tu This software is released under the MIT License.
  * 
  */
-#include <glog/logging.h>
+#include <iostream>
+#include <fstream>
+
+#include "mathlab/rand/rand.h"
 
 int main(int argc, char* argv[]) {
-    google::InitGoogleLogging(argv[0]);
 
-    // 设置日志输出到控制台而非文件（可选）
-    FLAGS_logtostderr = 1;
+    double num = ml::generateGaussian(0.0, 1.0);
 
-    LOG(INFO) << "Hello, Mathlab!";
+    std::cout<< "Generated Gaussian number: " << num << std::endl;
+    std::ofstream outfile("output.txt");
+    outfile << "Generated Gaussian number: " << num << std::endl;
+    outfile.close();
     return 0;
 }
