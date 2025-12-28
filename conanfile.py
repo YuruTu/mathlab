@@ -1,11 +1,12 @@
-'''
+"""
 @file: conanfile.py
 @description: Conan 包管理配置文件
 @author: Yuru.Tu
 @date: 2025-12-21
 @note 编码格式：UTF-8
 
-'''
+"""
+
 import os
 
 # 导入核心模块（Conan 2.0+ 推荐写法）
@@ -13,22 +14,23 @@ from conan import ConanFile
 from conan.tools.cmake import CMake, CMakeToolchain, cmake_layout
 from conan.tools.files import copy
 
+
 class MathlabConan(ConanFile):
     # 1. 包的元信息（必填/可选）
-    name = "mathlab"          # 包名（小写，无空格）
-    version = "1.0.0"           # 版本号（语义化版本）
-    license = "MIT"             # 许可证
+    name = "mathlab"  # 包名（小写，无空格）
+    version = "1.0.0"  # 版本号（语义化版本）
+    license = "MIT"  # 许可证
     author = "Yuru.Tu"  # 作者
-    description = " C++ library"   # 描述
-    topics = ("cpp", "utils", "example")   # 标签
-    #homepage = "https://github.com/your/repo"  # 主页
-    url = "https://github.com/YuruTu/mathlab"       # 仓库地址
+    description = " C++ library"  # 描述
+    topics = ("cpp", "utils", "example")  # 标签
+    # homepage = "https://github.com/your/repo"  # 主页
+    url = "https://github.com/YuruTu/mathlab"  # 仓库地址
 
     # 2. 构建配置（关键）
     settings = "os", "compiler", "build_type", "arch"  # 构建环境（自动适配）
     options = {"shared": [True, False], "fPIC": [True, False]}  # 自定义选项
-    default_options = {"shared": True, "fPIC": True}            # 选项默认值
-    exports_sources = "CMakeLists.txt", "src/*", "include/*" # 打包的源码文件
+    default_options = {"shared": True, "fPIC": True}  # 选项默认值
+    exports_sources = "CMakeLists.txt", "src/*", "include/*"  # 打包的源码文件
 
     # 3. 核心方法（按需实现）
     def layout(self):
@@ -45,7 +47,6 @@ class MathlabConan(ConanFile):
         self.requires("glog/0.7.1")
         # self.requires("spdlog/1.11.0", transitive_headers=True)
 
-    
     def build_requirements(self):
         self.test_requires("gtest/1.17.0")
 
@@ -67,11 +68,16 @@ class MathlabConan(ConanFile):
         output_dir = "E:\\package\\conan\\mathlab"
         self.run(f"cmake --install {self.build_folder} --prefix {output_dir}")
         # 拷贝license文件和其他必要文件
-        copy(self, "LICENSE", src=self.source_folder, dst=os.path.join(output_dir, "licenses"))
-        
-        import shutil
-        shutil.rmtree(self.package_folder)
+        copy(
+            self,
+            "LICENSE",
+            src=self.source_folder,
+            dst=os.path.join(output_dir, "licenses"),
+        )
 
+        import shutil
+
+        shutil.rmtree(self.package_folder)
 
     def package_info(self):
         # 导出包信息（供依赖者使用）
@@ -81,4 +87,3 @@ class MathlabConan(ConanFile):
         # 针对 Windows 动态库
         if self.settings.os == "Windows" and self.options.shared:
             self.cpp_info.defines = ["MATHLAB_SHARED"]
-            

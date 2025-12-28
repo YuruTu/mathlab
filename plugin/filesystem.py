@@ -1,11 +1,13 @@
-'''
+"""
 @file: plugin/filesystem.py
 @description: 文件系统相关的辅助函数
 @author: Yuru.Tu (ccl70710@gmail.com)
 @date: 2025-12-28
 @copyright: Yuru.Tu Copyright (c) 2025 Yuru.Tu This software is released under the MIT License.
-'''
+"""
+
 import os
+
 
 def create_empty_dir(path):
     """

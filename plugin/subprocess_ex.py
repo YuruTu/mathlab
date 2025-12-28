@@ -4,6 +4,7 @@ import threading
 import sys
 from typing import List, Optional, Tuple, Union, Dict
 
+
 def run_shell(
     cmd: Union[str, List[str]],
     cwd: Optional[str] = None,
@@ -66,11 +67,19 @@ def run_shell(
 
         threads = []
         if proc.stdout:
-            t = threading.Thread(target=_reader, args=(proc.stdout, stdout_parts, sys.stdout), daemon=True)
+            t = threading.Thread(
+                target=_reader,
+                args=(proc.stdout, stdout_parts, sys.stdout),
+                daemon=True,
+            )
             t.start()
             threads.append(t)
         if proc.stderr:
-            t2 = threading.Thread(target=_reader, args=(proc.stderr, stderr_parts, sys.stderr), daemon=True)
+            t2 = threading.Thread(
+                target=_reader,
+                args=(proc.stderr, stderr_parts, sys.stderr),
+                daemon=True,
+            )
             t2.start()
             threads.append(t2)
 
@@ -87,7 +96,9 @@ def run_shell(
         stderr = "".join(stderr_parts) if text else b"".join(stderr_parts)  # type: ignore
 
         if check and returncode != 0:
-            raise subprocess.CalledProcessError(returncode, cmd, output=stdout, stderr=stderr)
+            raise subprocess.CalledProcessError(
+                returncode, cmd, output=stdout, stderr=stderr
+            )
 
         return returncode, stdout, stderr
 
@@ -109,7 +120,12 @@ def run_shell(
         )
 
         if check and completed.returncode != 0:
-            raise subprocess.CalledProcessError(completed.returncode, cmd, output=completed.stdout, stderr=completed.stderr)
+            raise subprocess.CalledProcessError(
+                completed.returncode,
+                cmd,
+                output=completed.stdout,
+                stderr=completed.stderr,
+            )
 
         stdout = completed.stdout if capture_output else ""
         stderr = completed.stderr if capture_output else ""

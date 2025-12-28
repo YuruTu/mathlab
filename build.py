@@ -19,7 +19,7 @@ if __name__ == "__main__":
     if os.name == 'nt':
         logging.info("当前系统是 Windows")
         encoding_type = "gbk"
-    # else:
+    else:
         encoding_type = "utf-8"
     
     run_shell("conan remove mathlab --force", stream=True,encoding=encoding_type)
